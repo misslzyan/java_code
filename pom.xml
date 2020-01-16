@@ -11,9 +11,42 @@
         <scala.version>2.12.6</scala.version>
         <protobuf.version>2.5.0</protobuf.version>
         <protoc.path>${env.HADOOP_PROTOC_PATH}</protoc.path>
+        <java.version>1.8</java.version>
+        <maven.version>3.3.9</maven.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+
+        <!--"org.scala-lang.modules" %% "scala-xml" % "1.2.0"-->
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-xml_2.12</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
@@ -24,9 +57,58 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.googlecode.protobuf-rpc-pro/protobuf-rpc-pro-duplex -->
+        <dependency>
+            <groupId>com.googlecode.protobuf-rpc-pro</groupId>
+            <artifactId>protobuf-rpc-pro-duplex</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <rules>
+                        <requireMavenVersion>
+                            <version>${maven.version}</version>
+                        </requireMavenVersion>
+                        <requireJavaVersion>
+                            <version>${java.version}</version>
+                        </requireJavaVersion>
+                    </rules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>clean</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>pre-clean</phase>
+                    </execution>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                    <execution>
+                        <id>site</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>pre-site</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+
+
             <!-- hadoop proto buffer plugin -->
             <plugin>
                 <groupId>org.apache.hadoop</groupId>
@@ -52,6 +134,7 @@
                                 <directory>${basedir}/src/main/proto</directory>
                                 <includes>
                                     <include>addressbook.proto</include>
+                                    <include>SimpleProtocol.proto</include>
                                 </includes>
                             </source>
                         </configuration>
