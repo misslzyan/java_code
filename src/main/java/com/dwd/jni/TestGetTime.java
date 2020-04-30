@@ -11,6 +11,6 @@ public class TestGetTime {
 
 		public static void main(String[] args) {
 				GetTime getTime = new GetTime();
-				System.out.println(getTime.hello());
+				getTime.hello();
 		}
 }

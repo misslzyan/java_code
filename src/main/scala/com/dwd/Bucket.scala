@@ -10,7 +10,7 @@ package com.dwd
 object Bucket {
 
   def main(args: Array[String]): Unit = {
-    val str = ".hive-staging_hive_2019-11-08_11-20-44_234_2134200789933780428-1";
+    val str = ".hive-staging_hive_2020-02-10_16-50-35_344_7661396419894593551-1";
     println(str.hashCode & 2047)
   }
 }

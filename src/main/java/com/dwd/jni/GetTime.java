@@ -9,9 +9,9 @@ package com.dwd.jni;
 	*/
 public class GetTime {
 
-		public native String hello();
+		public native void hello();
 
 		static {
-				System.load("nativehello");
+				System.loadLibrary("GetTime");
 		}
 }
