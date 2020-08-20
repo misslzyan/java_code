@@ -9,7 +9,6 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FsStatus;
 import org.apache.hadoop.fs.Options;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.fs.QuotaUsage;
 import org.apache.hadoop.fs.permission.AclEntry;
 import org.apache.hadoop.fs.permission.AclStatus;
 import org.apache.hadoop.fs.permission.FsPermission;
@@ -240,11 +239,11 @@ public class TestRouterRPC extends Configured implements Tool {
 
 				// quotaUsage
 				try {
-						QuotaUsage qs = dfs.getQuotaUsage(src);
+//						QuotaUsage qs = dfs.getQuotaUsage(src);
 						println("quotaUsage error");
-				} catch (RemoteException e) {
-						// expect to throw exception
-						println("quotaUsage done");
+//				} catch (RemoteException e) {
+//						// expect to throw exception
+//						println("quotaUsage done");
 				} catch (Exception e) {
 						println("quotaUsage error");
 				}
